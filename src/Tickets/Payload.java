@@ -30,4 +30,10 @@ abstract class Payload
 		this.col = col;
 		this.type = type;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "[" + row + ", " + ('@' + col) + "]";
+	}
 }
