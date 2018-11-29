@@ -58,6 +58,10 @@ public class Order
 				sum+= i + " ";
 		return sum;
 	}
+	public void add()
+	{
+		
+	}
 	@Override
 	public String toString()
 	{
@@ -66,6 +70,5 @@ public class Order
 				+ "Children: " + getChildren() + "\n"
 				+ "Seniors: " + getSeniors() + "\n"
 				+ "Seats: " + getSeatCoords();
-				
 	}
 }
