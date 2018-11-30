@@ -10,6 +10,7 @@
 package Tickets;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 public class Main
 {
@@ -21,17 +22,20 @@ public class Main
 		String file1Name = "A1base.txt";
 		String file2Name = "A2base.txt";
 		String file3Name = "A3base.txt";
+		String fileUserName = "userdb.txt";
 	
 		// class for our auditorium
 		// if we cannot find the file, exit the program
 		Auditorium TheaterOne = null;
 		Auditorium TheaterTwo = null;
 		Auditorium TheaterThree = null;
+		HashMap<String, Customer> users = null;
 		try
 		{
-			TheaterOne = new Auditorium(new Scanner(new File(file1Name)));
-			TheaterTwo = new Auditorium(new Scanner(new File(file2Name)));
-			TheaterThree = new Auditorium(new Scanner(new File(file3Name)));
+			(TheaterOne = new Auditorium(new Scanner(new File(file1Name)))).setNum(1);
+			(TheaterTwo = new Auditorium(new Scanner(new File(file2Name)))).setNum(2);
+			(TheaterThree = new Auditorium(new Scanner(new File(file3Name)))).setNum(3);
+			users = Interface.readLogins(new Scanner(new File(fileUserName)));
 			TheaterOne.display();
 			TheaterTwo.display();
 			TheaterThree.display();
@@ -39,18 +43,22 @@ public class Main
 		catch (FileNotFoundException e)
 		{
 			System.out.println(e);
-			System.exit(1);	
+			System.exit(1);
 		}
 		
 		// change the scanner to use System.in
 		Scanner userIn = new Scanner(System.in);
-		Interface.mainMenu(userIn, TheaterOne);
 		
+		Customer user = null;
+		while ((user = Interface.loginMenu(userIn, users)) != null)
+		{
+			if(user.getUser() == "admin")
+				Interface.adminMenu(userIn, TheaterOne, TheaterTwo, TheaterThree);
+			else
+				Interface.mainMenu(userIn, user, TheaterOne, TheaterTwo, TheaterThree);
+		}
 		
-		userIn.close();
-		TheaterOne.printReport(file1Name);
-		TheaterTwo.printReport(file2Name);
-		TheaterThree.printReport(file3Name);
+
 		System.exit(0);
 	}
 }

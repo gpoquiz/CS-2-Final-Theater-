@@ -221,9 +221,9 @@ public class Auditorium
 		while ((newHead = current = newHead.getS()) != null);
 		
 	}
-	public void printReport(String filename)
+	public void printReport()
 	{
-
+		String filename = "A" + name + "base.txt";
 		int adultSales = 0, childSales = 0, seniorSales = 0;
 		// if we don't have a list, return
 		if (head == null)
@@ -266,13 +266,21 @@ public class Auditorium
 		{
 			System.out.println("File Not Found");
 		}
-		
+
+		System.out.print(String.format("%-13s", "Auditorium " + name));
+		System.out.print(String.format("%-11d", rows * cols - (adultSales + childSales + seniorSales)));
+		System.out.print(String.format("%-21d", (adultSales + childSales + seniorSales)));
+		System.out.print(String.format("%-12d", adultSales));
+		System.out.print(String.format("%-12d", childSales));
+		System.out.print(String.format("%-13d", seniorSales));
+		System.out.print(String.format("%-13.2f", 10 * adultSales + 5 * childSales + 7.5 * seniorSales));
+		/*
 		System.out.println("Total seats:  " + (rows * cols));
 		System.out.println("Total sold:   " + (adultSales + childSales + seniorSales));	
 		System.out.println("Adult Sold:   " + (adultSales));		
 		System.out.println("Child sold:   " + (childSales));	
 		System.out.println("Senior sold:  " + (seniorSales));
-		System.out.println("Total sales: $" + String.format("%.2f", 10 * adultSales + 5 * childSales + 7.5 * seniorSales));
+		System.out.println("Total sales: $" + String.format("%.2f", 10 * adultSales + 5 * childSales + 7.5 * seniorSales));*/
 
 	}
 }

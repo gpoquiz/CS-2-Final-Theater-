@@ -5,15 +5,10 @@ import java.util.ArrayList;
 public class Order
 {
 	private Auditorium aud;
-	private int num;
-	ArrayList<Payload> seats;
+	ArrayList<Node> seats;
 	
 	
-	public int getNum()
-	{
-		return num;
-	}
-	public ArrayList<Payload> getSeats()
+	public ArrayList<Node> getSeats()
 	{
 		return seats;
 	}
@@ -25,19 +20,27 @@ public class Order
 	{
 		this.aud = aud;
 	}
-	public void setNum(int num)
-	{
-		this.num = num;
-	}
-	public void setSeats(ArrayList<Payload> seats)
+	public void setSeats(ArrayList<Node> seats)
 	{
 		this.seats = seats;
+	}
+	public void addSeat(Node p)
+	{
+		seats.add(p);
+	}
+
+	public Node hasSeat(int row, int col)
+	{
+		for (Node i : seats)
+			if (i.getRow() == row && i.getCol() == col)
+				return i;
+		return null;
 	}
 
 	public int getAdults()
 	{
 		int sum = 0;
-		for (Payload i : seats)
+		for (Node i : seats)
 			if (i.getType() == 'A')
 				sum++;
 		return sum;
@@ -46,7 +49,7 @@ public class Order
 	public int getChildren()
 	{
 		int sum = 0;
-		for (Payload i : seats)
+		for (Node i : seats)
 			if (i.getType() == 'C')
 				sum++;
 		return sum;
@@ -54,7 +57,7 @@ public class Order
 	public int getSeniors()
 	{
 		int sum = 0;
-		for (Payload i : seats)
+		for (Node i : seats)
 			if (i.getType() == 'S')
 				sum++;
 		return sum;
@@ -63,21 +66,25 @@ public class Order
 	{
 		String sum = "";
 
-		for (Payload i : seats)
+		for (Node i : seats)
 				sum+= i + " ";
 		return sum;
 	}
-	public void add()
+	public void cancelOrder()
 	{
-		
+		for (Node i : seats)
+		{
+			i.setType('#');
+			seats.remove(i);
+		}
 	}
 	@Override
 	public String toString()
 	{
-		return "Order " + num + "\n"
+		return    "Auditorium: " + aud.getNum() + "\n"
 				+ "Adults: " + getAdults() + "\n"
 				+ "Children: " + getChildren() + "\n"
 				+ "Seniors: " + getSeniors() + "\n"
-				+ "Seats: " + getSeatCoords();
+				+ "Seats: " + getSeatCoords() + "\n";
 	}
 }
