@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Order
 {
+	private Auditorium aud;
 	private int num;
 	ArrayList<Payload> seats;
 	
@@ -15,6 +16,14 @@ public class Order
 	public ArrayList<Payload> getSeats()
 	{
 		return seats;
+	}
+	public Auditorium getAud()
+	{
+		return aud;
+	}
+	public void setAud(Auditorium aud)
+	{
+		this.aud = aud;
 	}
 	public void setNum(int num)
 	{

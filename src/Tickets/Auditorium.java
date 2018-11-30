@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Auditorium
 {
 	// identification number
-	private int num;
+	private int name;
 	private Node head;
 	private int rows, cols;
 	
@@ -83,11 +83,11 @@ public class Auditorium
 	}
 	public int getNum()
 	{
-		return num;
+		return name;
 	}
 	public void setNum(int num)
 	{
-		this.num = num;
+		this.name = num;
 	}
 	public Node getNode(int row, int col)
 	{

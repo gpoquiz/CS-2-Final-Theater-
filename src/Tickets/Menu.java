@@ -1,13 +1,47 @@
 package Tickets;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Menu
 {
-
-	public void loginMenu()
+	
+	public HashMap<String, Customer> readLogins(Scanner in)
 	{
-		
+		String user, pass;
+		HashMap<String, Customer> hash = new HashMap<String, Customer>();
+		while (in.hasNext())
+		{
+			user = in.next();
+			pass = in.next();
+			hash.put(pass, new Customer(user));
+		}
+		return hash;
+	}
+	public Customer loginMenu(Scanner in, HashMap<String, Customer> hash)
+	{
+
+		Customer user;
+		String userName;
+		do
+		{
+			System.out.print("Enter username: ");
+			userName = in.next();
+
+			int attempts = 0;
+			String pass = "";
+			while (attempts < 3);
+			{
+				attempts++;
+				System.out.print("Enter password: ");
+				pass = in.next();
+				user = hash.get(pass);
+				if (user.getUser() == userName)
+					break;
+			}
+			
+		} while (user != null && user.getUser() != userName);
+		return user;
 	}
 	public void mainMenu(Scanner userIn, Auditorium Theater)
 	{

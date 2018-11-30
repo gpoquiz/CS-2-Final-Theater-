@@ -11,12 +11,13 @@ package Tickets;
 
 abstract class Payload
 {
+
 	protected int row;
 	protected int col;
 	protected char type;
 	
 	public Payload(){row = col = type = 0;}
-	
+
 	public int getRow() {return row;}
 	public int getCol() {return col;}
 	public char getType() {return type;}
